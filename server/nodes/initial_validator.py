@@ -1,5 +1,6 @@
 from llm import llm
 from graph_state import GraphState
+from schema.initial_validator import InitialValidator
 from langchain_core.prompts import MessagesPlaceholder, ChatPromptTemplate
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
@@ -14,33 +15,33 @@ def initial_validator(state: GraphState):
                 You are a binary classifier.
 
                 Task:
-                - Determine if the user's query is about **understanding, simplifying, or explaining legal documents**.
+                - Determine if the user's query is about understanding, simplifying, or explaining legal documents.
                 - Respond with exactly one word:
-                  - "Valid" → if query relates to legal documents, contracts, compliance, clauses, risks, or making them easier to understand.
-                  - "Not Valid" → if unrelated.
+                  - "true" → if query relates to legal documents, contracts, compliance, clauses, risks, or making them easier to understand.
+                  - "false" → if unrelated.
 
                 Constraints:
                 - Do NOT add punctuation, explanation, or extra words.
-                - Answer must be strictly "Valid" or "Not Valid".
+                - Answer must be strictly "true" or "false".
 
                 Examples:
                 User: "Can you simplify this contract for me?"
-                Assistant: Valid
+                Assistant: true
 
                 User: "What is a force majeure clause?"
-                Assistant: Valid
+                Assistant: true
 
                 User: "Translate this agreement into plain English."
-                Assistant: Valid
+                Assistant: true
 
                 User: "Tell me a joke."
-                Assistant: Not Valid
+                Assistant: false
 
                 User: "Summarize today's cricket match."
-                Assistant: Not Valid
+                Assistant: false
 
                 User: "What are my obligations under this NDA?"
-                Assistant: Valid
+                Assistant: true
                 """
             ),
             MessagesPlaceholder(variable_name="messages"),
@@ -48,6 +49,7 @@ def initial_validator(state: GraphState):
         ]
     )
 
-    chain = prompt | llm
+    llm_with_structured_output = llm.with_structured_output(InitialValidator)
+    chain = prompt | llm_with_structured_output
     response = chain.invoke({'messages': messages})
-    return {'messages': [AIMessage(content=response.content)]}
+    return {'is_valid': response.is_valid}
