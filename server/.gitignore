@@ -1,0 +1,70 @@
+# ------------------------
+# Python
+# ------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Bytecode cache
+*.pyc
+__pycache__/
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+wheels/
+.eggs/
+.installed.cfg
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.uv/
+
+# ------------------------
+# uv-specific
+# ------------------------
+# uv local environment (dependencies, lockfiles, etc.)
+.uv/
+.uv.lock
+
+# ------------------------
+# Testing / coverage
+# ------------------------
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+
+# ------------------------
+# IDEs / Editors
+# ------------------------
+.vscode/
+.idea/
+*.iml
+
+# ------------------------
+# OS / Misc
+# ------------------------
+.DS_Store
+Thumbs.db
+
+.langgraph_api/
