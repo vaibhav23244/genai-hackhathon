@@ -1,18 +1,23 @@
 import random
+from llm import llm
 from graph_state import GraphState
-from langchain_core.messages import AIMessage
+# from langchain_core.messages import AIMessage
+from langchain_core.prompts import PromptTemplate
 
-def valid(_: GraphState):
-    responses = [
-        "Got it! Let’s continue 🚀",
-        "Perfect, I can work with that.",
-        "Nice, let’s move forward.",
-        "Thanks, that makes sense.",
-        "Awesome, let me process this.",
-        "Cool, I’ll take it from here.",
-        "Sounds good, let’s do this!",
-    ]
+def valid(state: GraphState):
+    messages = state['messages']
+    last_message = messages[-1].content
     
+    prompt = PromptTemplate(
+        template='''You are a helpful assistant.
+        Your task is to answer the user's question.
+        The user's question is: {question}
+        ''',
+        input_variables=['question']
+    )
+    
+    chain = prompt | llm
+    response = chain.invoke({'question': last_message})
     return {
-        "messages": [AIMessage(content=random.choice(responses))]
+        "messages": response
     }
