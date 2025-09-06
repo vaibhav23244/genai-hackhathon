@@ -70,3 +70,5 @@ Thumbs.db
 .langgraph_api/
 
 .env
+
+gcp-key.json
