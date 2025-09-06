@@ -1,55 +1,35 @@
 from llm import llm
 from graph_state import GraphState
+from langchain_core.prompts import PromptTemplate
 from schema.initial_validator import InitialValidator
-from langchain_core.prompts import MessagesPlaceholder, ChatPromptTemplate
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 def initial_validator(state: GraphState):
-    messages = state['messages']
-    last_message = messages[-1].content
-    
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            SystemMessage(
-                content = """
-                You are a binary classifier.
+    doc_content = state["doc_content"]
+    prompt = PromptTemplate(
+        template='''
+            You are a binary classifier.
+            
+            Task:
+                - Read the document content provided.
+                - Determine if it is a legal document belonging to one of these categories only:
+                  1. Loan Agreement
+                  2. Rental Agreement
+                  3. Terms of Service
 
-                Task:
-                - Determine if the user's query is about understanding, simplifying, or explaining legal documents.
                 - Respond with exactly one word:
-                  - "true" → if query relates to legal documents, contracts, compliance, clauses, risks, or making them easier to understand.
-                  - "false" → if unrelated.
+                  - "true" → if it clearly belongs to one of these categories.
+                  - "false" → if it belongs to ANYTHING else (court orders, wills, affidavits, notices, personal text, etc.).
 
-                Constraints:
+            Constraints:
                 - Do NOT add punctuation, explanation, or extra words.
                 - Answer must be strictly "true" or "false".
 
-                Examples:
-                User: "Can you simplify this contract for me?"
-                Assistant: true
-
-                User: "What is a force majeure clause?"
-                Assistant: true
-
-                User: "Translate this agreement into plain English."
-                Assistant: true
-
-                User: "Tell me a joke."
-                Assistant: false
-
-                User: "Summarize today's cricket match."
-                Assistant: false
-
-                User: "What are my obligations under this NDA?"
-                Assistant: true
-                """
-            ),
-            MessagesPlaceholder(variable_name="messages"),
-            HumanMessage(content=last_message),
-        ]
+            Document Content:
+            {doc_content}     
+        ''',
+        input_variables=["doc_content"],
     )
-
     llm_with_structured_output = llm.with_structured_output(InitialValidator)
     chain = prompt | llm_with_structured_output
-    response = chain.invoke({'messages': messages})
+    response = chain.invoke({'doc_content': doc_content})
     return {'is_valid': response.is_valid}
