@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
 from schema.initial_validator import InitialValidator
 from typing import TypedDict, Annotated, List, NotRequired
 from langgraph.graph.message import add_messages, AnyMessage
