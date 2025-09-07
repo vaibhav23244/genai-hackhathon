@@ -10,3 +10,4 @@ class GraphState(TypedDict):
     is_doc_valid: NotRequired[Literal["valid", "invalid"]] = Field(description="Indicates if the document is valid or invalid")
     doc_category: NotRequired[Literal["contract", "will", "affidavit", "article"]] = Field(description="Category of the document")
     is_valid: NotRequired[InitialValidator]
+    doc_summary: NotRequired[str] = Field(description="Generated summary of the document")
