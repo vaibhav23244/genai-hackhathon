@@ -4,7 +4,6 @@ from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def summarizer(state: GraphState):
     doc_content = state["doc_content"]
-
     prompt = PromptTemplate(
         template='''
             You are a professional legal document summarizer.
@@ -20,12 +19,9 @@ def summarizer(state: GraphState):
             Document Content:
             {doc_content}
         
-            Summary:
         ''',
         input_variables=["doc_content"],
     )
-
     chain = prompt | llm
     response = chain.invoke({'doc_content': doc_content})
-
     return {"doc_summary": response}

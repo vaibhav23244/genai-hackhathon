@@ -1,6 +1,6 @@
 from llm import llm
 from langchain_core.prompts import PromptTemplate
-from schema.initial_validator import InitialValidator
+from schema.initial_validator_schema import InitialValidatorSchema
 from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def initial_validator(state: GraphState):
@@ -27,7 +27,7 @@ def initial_validator(state: GraphState):
     """,
     input_variables=["doc_content"],
     )
-    llm_with_structured_output = llm.with_structured_output(InitialValidator)
+    llm_with_structured_output = llm.with_structured_output(InitialValidatorSchema)
     chain = prompt | llm_with_structured_output
     response = chain.invoke({'doc_content': doc_content})
     return {'is_valid': response.is_valid}
