@@ -10,3 +10,4 @@ class GraphState(TypedDict):
     doc_content: NotRequired[str] = Field(description="Content of the document")
     doc_summary: NotRequired[str] = Field(description="Generated summary of the document")
     doc_invalid_reason: NotRequired[str] = Field(description="Reason why the document is invalid, if applicable")
+    doc_explanation: NotRequired[str] = Field(description="Beginner-friendly explanation of the document")
