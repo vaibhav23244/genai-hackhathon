@@ -1,6 +1,6 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "graph": "./main.py:graph"
+    "uploader": "./uploader/uploader_graph/uploader_graph.py:uploader_graph"
   }
 }

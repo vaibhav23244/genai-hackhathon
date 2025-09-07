@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from graph_state import GraphState
 from langchain_google_community import GCSFileLoader
+from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 load_dotenv()
 

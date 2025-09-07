@@ -1,4 +1,4 @@
-from graph_state import GraphState
+from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def valid_router(state: GraphState):
     is_valid = state['is_valid']

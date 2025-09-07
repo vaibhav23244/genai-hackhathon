@@ -1,6 +1,5 @@
-import random
 from llm import llm
-from graph_state import GraphState
+from uploader.uploader_graph_state.uploader_graph_state import GraphState
 # from langchain_core.messages import AIMessage
 from langchain_core.prompts import PromptTemplate
 

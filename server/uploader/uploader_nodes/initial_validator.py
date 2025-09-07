@@ -1,7 +1,7 @@
 from llm import llm
-from graph_state import GraphState
 from langchain_core.prompts import PromptTemplate
 from schema.initial_validator import InitialValidator
+from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def initial_validator(state: GraphState):
     doc_content = state["doc_content"]
@@ -18,7 +18,7 @@ def initial_validator(state: GraphState):
 
                 - Respond with exactly one word:
                   - "true" → if it clearly belongs to one of these categories.
-                  - "false" → if it belongs to ANYTHING else (court orders, wills, affidavits, notices, personal text, etc.).
+                  - "false" → if it belongs to ANYTHING else (court orders, wills, affidavits, notices, personal text, circulars, articles, etc.).
 
             Constraints:
                 - Do NOT add punctuation, explanation, or extra words.

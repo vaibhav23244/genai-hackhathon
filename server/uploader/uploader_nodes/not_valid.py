@@ -1,6 +1,6 @@
 import random
-from graph_state import GraphState
 from langchain_core.messages import AIMessage
+from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def not_valid(_: GraphState):
     responses = [
