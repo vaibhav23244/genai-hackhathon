@@ -6,8 +6,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "langchain>=0.3.27",
+    "langchain-google-community[gcs]>=2.0.7",
     "langchain-google-genai>=2.1.10",
+    "langchain-groq>=0.3.7",
     "langgraph>=0.6.6",
     "langgraph-cli[inmem]>=0.4.0",
     "python-dotenv>=1.1.1",
+    "unstructured[pdf]>=0.18.14",
 ]
