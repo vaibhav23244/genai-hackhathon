@@ -1,4 +1,4 @@
-from llm import llm
+from config.llm import llm
 from langchain_core.prompts import PromptTemplate
 from schema.category_schema import CategorySchema
 from uploader.uploader_graph_state.uploader_graph_state import GraphState

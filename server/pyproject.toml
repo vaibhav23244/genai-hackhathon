@@ -7,8 +7,10 @@ requires-python = ">=3.12"
 dependencies = [
     "langchain>=0.3.27",
     "langchain-google-community[gcs]>=2.0.7",
+    "langchain-google-firestore>=0.5.0",
     "langchain-google-genai>=2.1.10",
-    "langchain-groq>=0.3.7",
+    "langchain-google-vertexai>=2.0.28",
+    "langchain-ollama>=0.3.7",
     "langgraph>=0.6.6",
     "langgraph-cli[inmem]>=0.4.0",
     "python-dotenv>=1.1.1",

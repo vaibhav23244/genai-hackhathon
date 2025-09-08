@@ -16,5 +16,5 @@ def extract_content(state: GraphState):
     )
     documents = loader.load()
     return {
-        "doc_content": "".join(doc.page_content for doc in documents)
+        "doc_content": documents
     }

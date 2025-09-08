@@ -1,9 +1,12 @@
-from llm import llm
+from config.llm import llm
 from langchain_core.prompts import PromptTemplate
 from uploader.uploader_graph_state.uploader_graph_state import GraphState
 
 def summarizer(state: GraphState):
-    doc_content = state["doc_content"]
+    doc_content = state.get("doc_content", [])
+    full_content = "\n".join([doc.page_content for doc in doc_content])
+    if not full_content:
+        return {"doc_summary": ""} 
     prompt = PromptTemplate(
         template='''
             You are a professional legal document summarizer.
@@ -17,11 +20,11 @@ def summarizer(state: GraphState):
                 - Do not omit critical legal details.
         
             Document Content:
-            {doc_content}
+            {full_content}
         
         ''',
-        input_variables=["doc_content"],
+        input_variables=["full_content"],
     )
     chain = prompt | llm
-    response = chain.invoke({'doc_content': doc_content})
+    response = chain.invoke({'full_content': full_content})
     return {"doc_summary": response}
