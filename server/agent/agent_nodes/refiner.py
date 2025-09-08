@@ -12,6 +12,7 @@ def refine_prompt(state: AgentState):
          "that maximizes understanding and results.\n"
          "Rules:\n"
          "- Keep the intent of the prompt unchanged.\n"
+         "- Make it easy to understand for an AI.\n"
          "- Make it concise but expressive.\n"
          "- If the user prompt is vague, add context to make it meaningful.\n"
          "- Ensure it's in natural, fluent English."),
