@@ -23,25 +23,10 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.className} dark tracking-tight antialiased`}
       >
-        <div className="relative min-h-screen w-full overflow-hidden">
-          <div
-            className="pointer-events-none absolute inset-0 z-0"
-            style={{
-              background: `
-        radial-gradient(
-          circle at center,
-          rgba(59, 130, 246, 0.12) 0%,
-          rgba(59, 130, 246, 0.06) 20%,
-          rgba(0, 0, 0, 0.0) 60%
-        )
-      `,
-            }}
-          />
-          <main>
-            <Navbar />
-            {children}
-          </main>
-        </div>
+        <main>
+          <Navbar />
+          {children}
+        </main>
       </body>
     </html>
   );
