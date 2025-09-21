@@ -1,6 +1,7 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "uploader": "./uploader/uploader_graph/uploader_graph.py:uploader_graph"
+    "uploader": "./uploader/uploader_graph/uploader_graph.py:uploader_graph",
+    "agent": "./agent/agent_graph/agent_graph.py:agent_graph"
   }
 }
